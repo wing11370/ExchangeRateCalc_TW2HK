@@ -19,3 +19,12 @@ https://www.unionpayintl.com/hk/rate/
 2. 每一次提款都需要 $20港幣的跨國提款手續費。
 
 3. 由於提款是透過銀聯的匯率，不能使用即時匯率。
+
+
+使用程式語言：Python
+
+程式使用的技術：網路爬蟲
+
+使用套件：Beautifulsoup
+
+程式執行方法：“python TodayUnionPayRate.py”
