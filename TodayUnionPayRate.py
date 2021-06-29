@@ -48,16 +48,14 @@ def start():
             
             again=1
             while again:
-                try:
-                    contin=input("要執行新的計算嗎？ 0:離開；1:繼續")
-                    if contin=="0":
-                        start=0
-                        again=0
-                        break
-                    elif contin=="1":
-                        start=1
-                        again=0
-                        continue
-                    else:print("請輸入 0或1")
-                except:print("請輸入 0或1")
+                contin=input("要執行新的計算嗎？ 0:離開；1:繼續")
+                if contin=="0":
+                    start=0
+                    again=0
+                    break
+                elif contin=="1":
+                    start=1
+                    again=0
+                    continue
+                else:print("請輸入 0或1")
         except:print("請輸入整數")
