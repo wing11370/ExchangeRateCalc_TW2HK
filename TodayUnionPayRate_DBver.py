@@ -7,7 +7,7 @@ class Flow_DBver():
         self.MySQL_connection = MySQL_Actions()
         self.rate = self.MySQL_connection.get_today_rate()
 
-        if self.rate == None: print("None")
+        if self.rate == None: print("本日銀聯匯率未更新")
         else:print(f"本日銀聯匯率 :{self.rate}\n港幣$ 1 = 新台幣${str(1/float(self.rate))}")
 
         print("香港的金融卡在台灣ATM提款，每一筆需要 港幣$20手續費\n每一筆提款最高可領取 新台幣$20000")
