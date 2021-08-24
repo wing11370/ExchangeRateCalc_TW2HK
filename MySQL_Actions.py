@@ -9,7 +9,7 @@ class MySQL_Actions:
             "host": "127.0.0.1",
             "port": 3306,
             "user": "root",
-            "password": ???,
+            "password": "???",#需要修改密碼
             "db": "ExchangeRateCalc_TW2HK",
             "charset": "utf8"
         }
