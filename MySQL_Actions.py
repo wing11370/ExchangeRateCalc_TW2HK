@@ -14,6 +14,7 @@ class MySQL_Actions:
             "charset": "utf8"
         }
         self.today = datetime.date.today()
+        self.time = datetime.datetime.now()
 
     def get_req_from_unionpay(self,date):
         URL = f"https://www.unionpayintl.com/upload/jfimg/{date}.json"
@@ -79,23 +80,36 @@ class MySQL_Actions:
     
     def get_today_rate(self):
         try:
-        # 建立Connection物件
+            # 建立Connection物件
             conn = mysql.connector.connect(**self.db_settings)
+            # print("# 建立conn物件成功")
             # 建立Cursor物件
             cursor = conn.cursor()
-            
+            # print("# 建立cursor物件成功")
+
             # date = self.today - datetime.timedelta(days=14)
             date = self.today
             # print(str(date).replace("-","/") , f"DAY OF WEEK:{date.weekday()}")
             temp_date = date
-            for i in range(3):
-                if temp_date.weekday()>4:#Mon:0, FRI:4
-                    temp_date = date - datetime.timedelta(days=i)
+            time = self.time
+            
+            # for i in range(3):
+            if date.weekday()>4:#Mon:0, FRI:4
+                temp_date = date - datetime.timedelta(days=temp_date.weekday()-4)
+            elif (date.weekday()>0 and date.weekday()<=4 and ((time.hour!=16 and time.minute<30) or time.hour<16)):
+                temp_date = date - datetime.timedelta(days=1)
+            elif (date.weekday()==0 and ((time.hour!=16 and time.minute<30) or time.hour<16)):
+                temp_date = date - datetime.timedelta(days=3)
+            else:
+                temp_date = date
 
+            # print(temp_date)
+            # print(temp_date.weekday())
             query_date = str(temp_date).replace("-","/") 
             # print(query_date,f"DAY OF WEEK:{temp_date.weekday()}")
 
             cursor.execute(f"SELECT rateData FROM RateRecord WHERE DATE = '{query_date}';")
+
             records = cursor.fetchone()
             # for item in records:
                 # print(item)
@@ -103,5 +117,6 @@ class MySQL_Actions:
             conn.close()
             return records[0]
         except Exception as ex:
-            print(ex)
+            # print(ex)
+            print("連線不成功")
         
