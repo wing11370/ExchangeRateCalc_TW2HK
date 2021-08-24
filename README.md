@@ -36,4 +36,7 @@
 ==================================================
 
 使用程式語言：Python
-程式執行方法：“python main.py”
+程式執行方法：
+1. 先設定好MySQL的dump
+2. 修改 "MySQL_Actions.py"的DB server參數設定
+3. 執行“python main.py”
